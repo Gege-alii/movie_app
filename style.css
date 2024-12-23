@@ -1,0 +1,71 @@
+/* Gradient background animation for body, navbar, and cards */
+@keyframes gradientBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Body background */
+body {
+    background: linear-gradient(45deg, #f8f9fa, #343a40, #6c757d, #495057);
+    background-size: 400% 400%;
+    animation: gradientBackground 15s ease infinite;
+}
+
+/* Navbar */
+.navbar {
+    background: linear-gradient(45deg, #343a40, #6c757d, #495057, #f8f9fa);
+    background-size: 400% 400%;
+    animation: gradientBackground 15s ease infinite;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2); 
+}
+
+.nav-link {
+    color: #fff !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #adb5bd !important;
+}
+
+/* Movie card */
+.movie-card {
+    margin: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(45deg, #f8f9fa, #343a40, #6c757d, #495057); 
+    background-size: 400% 400%;
+    animation: gradientBackground 15s ease infinite;
+    color: white; 
+    border: none; 
+}
+
+.movie-img {
+    height: 400px;
+    object-fit: cover;
+}
+.movie-details {
+    display: none;
+    margin: 50px 0;
+} 
+.movie-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.card-title, .card-text {
+    color: white;
+}
+
+/* Forms */
+.modal-body{
+    background: linear-gradient(45deg, #343a40, #6c757d, #495057, #f8f9fa);
+    background-size: 400% 400%;
+    animation: gradientBackground 15s ease infinite;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2); 
+}
+
+input{
+    background: linear-gradient(45deg, #343a40, #6c757d, #495057, #f8f9fa);
+}
