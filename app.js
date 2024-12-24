@@ -5,6 +5,7 @@ class MovieApp {
         this.movieList = $("#movie-list");
         this.movieListSection = $("#movie-list-section");
         this.movieDetailsSection = $("#movie-details-section");
+        this.allMovies = [];
 
         this.initAuth();
 
@@ -28,15 +29,15 @@ class MovieApp {
         $("#logout-btn").on("click", () => {
             this.logout(); 
         });
-        
-        $("#signup-link").on("click", function() {
-            $("#login-modal").modal("hide");
-            $("#signup-modal").modal("show");
+
+        // Listen for search input
+        $("#movie-search").on("input", (e) => {
+            this.searchMovies(e.target.value);
         });
 
         this.fetchMovies('popular');
     }
-  
+
     initAuth() {
         const loggedInUser = localStorage.getItem('loggedInUser');
         if (loggedInUser) {
@@ -107,7 +108,8 @@ class MovieApp {
         try {
             const response = await fetch(`${this.apiUrl}/movie/${category}?api_key=${this.apiKey}`);
             const data = await response.json();
-            this.displayMovies(data.results);
+            this.allMovies = data.results; 
+            this.displayMovies(this.allMovies);
         } catch (error) {
             console.error("Error fetching movies:", error);
         }
@@ -134,6 +136,25 @@ class MovieApp {
 
         this.showMovieList();
     }
+
+    searchMovies(query) {
+        const filteredMovies = this.allMovies.filter(movie => 
+            movie.title.toLowerCase().includes(query.toLowerCase()) ||
+            movie.overview.toLowerCase().includes(query.toLowerCase())
+        );
+    
+        this.displayMovies(filteredMovies);
+        if (query && filteredMovies.length === 0) {
+            $("#error-message")
+                .removeClass("d-none")  
+                .addClass("animate__animated animate__fadeIn");  
+        } else {
+            $("#error-message")
+                .addClass("d-none")  
+                .removeClass("animate__fadeIn");  
+        }
+    }
+    
 
     async showMovieDetails(movieId) {
         const loggedInUser = localStorage.getItem('loggedInUser');
