@@ -138,19 +138,18 @@ class MovieApp {
     }
 
     searchMovies(query) {
-        const loggedInUser = localStorage.getItem('loggedInUser'); // Check if user is logged in
+        const loggedInUser = localStorage.getItem('loggedInUser');
         if (!loggedInUser) {
-            // Show SweetAlert if the user is not logged in
             Swal.fire({
                 title: 'Please log in first',
                 text: 'You need to log in to search for movies.',
                 icon: 'warning',
                 confirmButtonText: 'Log in',
                 preConfirm: () => {
-                    this.showLoginModal(); // Show the login modal
+                    this.showLoginModal();
                 }
             });
-            return; // Stop the search if the user is not logged in
+            return; 
         }
     
         const filteredMovies = this.allMovies.filter(movie => 
@@ -159,16 +158,14 @@ class MovieApp {
         );
     
         this.displayMovies(filteredMovies);
-    
-        // Show error message if no movies match the search
         if (query && filteredMovies.length === 0) {
             $("#error-message")
-                .removeClass("d-none")  // Make the error message visible
-                .addClass("animate__animated animate__fadeIn");  // Add animation class
+                .removeClass("d-none")  
+                .addClass("animate__animated animate__fadeIn"); 
         } else {
             $("#error-message")
-                .addClass("d-none")  // Hide the error message
-                .removeClass("animate__fadeIn");  // Remove animation class
+                .addClass("d-none") 
+                .removeClass("animate__fadeIn");  
         }
     }
     
